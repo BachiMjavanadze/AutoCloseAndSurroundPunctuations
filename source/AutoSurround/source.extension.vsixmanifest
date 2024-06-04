@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="AutoCloseAndSurroundPunctuations.85c66dba-8fe0-47c9-baa9-0f7f164c2770" Version="1.0.0" Language="en-US" Publisher="Bachi Mjavanadze" />
+        <Identity Id="AutoCloseAndSurroundPunctuations.85c66dba-8fe0-47c9-baa9-0f7f164c2770" Version="1.0.1" Language="en-US" Publisher="Bachi Mjavanadze" />
         <DisplayName>Auto Close &amp; Surround Punctuations</DisplayName>
         <Description xml:space="preserve">The extension brings `VSCode`'s Punctuations "Auto Surround" feature to Visual Studio and fixes "Auto Close" bug.</Description>
         <MoreInfo>https://github.com/BachiMjavanadze/AutoCloseAndSurroundPunctuations</MoreInfo>
