@@ -27,7 +27,7 @@ To avoid overlapping I recomend disable `Visual Studio`'s' standard behaviors:
 and
 `Automatically surround selection when typing quotes or brackets`
 </Description>
-        <MoreInfo>https://github.com/reduckted/AutoSurround</MoreInfo>
+        <MoreInfo>https://github.com/BachiMjavanadze/AutoCloseAndSurroundPunctuations</MoreInfo>
         <License>Resources\LICENSE</License>
         <Icon>Resources\AutoSurround.png</Icon>
         <PreviewImage>Resources\AutoSurround.png</PreviewImage>
