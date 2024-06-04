@@ -56,7 +56,10 @@
       <Link>Resources\LICENSE</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Resources\AutoSurround.png" />
+    <Content Include="Resources\AutoCloseAndSurroundPunctuations.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <EmbeddedResource Include="Languages\vscode.json" />
     <EmbeddedResource Include="Languages\liquid.json" />
     <EmbeddedResource Include="Languages\cmake.json" />
