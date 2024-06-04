@@ -1,6 +1,8 @@
 # Auto Close & Surround Punctuations
 
-The extension brings `VSCode`'s Punctuations "Auto Surround" feature to Visual Studio:
+This is `Visual Studio IDE` extension. It brings `VSCode`'s Punctuations "Auto Surround" feature and fixes "Auto Close" bug.
+
+Here is "Auto Surround" feature:
 
 ![1](https://github.com/BachiMjavanadze/AutoCloseAndSurroundPunctuations/assets/38082501/1fb7746d-38db-40dd-8c24-a75e63ae1596)
 
