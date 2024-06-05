@@ -4,7 +4,7 @@ This is a `Visual Studio IDE` extension. Download it from [Marketplace](https://
 
 > ## Warning:
 
-> #### To avoid errors, be sure to disable the default behavior of `Visual Studio`. Go to `Menu > Settings > Tools`, find these options and uncheck the box:
+> #### To avoid errors, be sure to disable the default behavior of `Visual Studio`. Go to `Menu > Tools > Options`, find these options and uncheck the box:
 > ####  `Automatic brace completion`
 > and
 > ####  `Automatically surround selection when typing quotes or brackets`
