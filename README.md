@@ -1,6 +1,15 @@
 # Auto Close & Surround Punctuations
 
-This is `Visual Studio IDE` extension. It brings `VSCode`'s Punctuations "Auto Surround" feature and fixes "Auto Close" bug.
+This is a `Visual Studio IDE` extension. Download it from [Marketplace](https://marketplace.visualstudio.com/items?itemName=BachiMjavanadze.AutoCloseAndSurroundPunctuations).
+
+> ## Warning:
+
+> #### To avoid errors, be sure to disable the default behavior of `Visual Studio`. Go to `Menu > Settings > Tools`, find these options and uncheck the box:
+> ####  `Automatic brace completion`
+> and
+> ####  `Automatically surround selection when typing quotes or brackets`
+
+The extension brings `VSCode`'s Punctuations "Auto Surround" feature and fixes "Auto Close" bug.
 
 Here is "Auto Surround" feature:
 
