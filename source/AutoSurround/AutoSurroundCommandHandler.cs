@@ -47,7 +47,6 @@ public class AutoSurroundCommandHandler : ICommandHandler<TypeCharCommandArgs> {
         }
     }
 
-
     public bool ExecuteCommand(TypeCharCommandArgs args, CommandExecutionContext executionContext) {
         if (args.TypedChar == '<') {
             if (!args.TextView.Selection.IsEmpty) {
@@ -59,12 +58,84 @@ public class AutoSurroundCommandHandler : ICommandHandler<TypeCharCommandArgs> {
                 // If no text is selected and the typed character is '<', just insert '<'
                 ITextUndoHistory history = _textUndoHistoryRegistry.GetHistory(args.TextView.TextBuffer);
                 using (ITextUndoTransaction transaction = history.CreateTransaction($"<Insert")) {
-                    int position = args.TextView.Selection.ActivePoint.Position;
+                    int position = args.TextView.Caret.Position.BufferPosition.Position;
                     args.TextView.TextBuffer.Insert(position, "<");
                     transaction.Complete();
                 }
                 return true;
             }
+        } else if (args.TypedChar == '"' && args.TextView.Selection.IsEmpty) {
+            // Handle the double quote character when no text is selected
+            int position = args.TextView.Caret.Position.BufferPosition.Position;
+            ITextSnapshot snapshot = args.TextView.TextBuffer.CurrentSnapshot;
+
+            // Get the previous and next characters
+            char prevChar = position > 0 ? snapshot[position - 1] : '\0';
+            char nextChar = position < snapshot.Length ? snapshot[position] : '\0';
+
+            // Define the conditions under which only a single quote should be inserted
+            bool doubleQuoteCondition =
+                char.IsLetterOrDigit(nextChar) ||
+                char.IsLetterOrDigit(prevChar) ||
+                nextChar == '"' ||
+                prevChar == '"';
+
+            if (doubleQuoteCondition) {
+                // Just insert a single quote
+                ITextUndoHistory subHistory = _textUndoHistoryRegistry.GetHistory(args.TextView.TextBuffer);
+                using (ITextUndoTransaction transaction = subHistory.CreateTransaction($"Insert \"")) {
+                    args.TextView.TextBuffer.Insert(position, "\"");
+                    transaction.Complete();
+                }
+                return true;
+            }
+
+            // If no text is selected and conditions do not match, handle insertion of double quotes
+            ITextUndoHistory history = _textUndoHistoryRegistry.GetHistory(args.TextView.TextBuffer);
+            using (ITextUndoTransaction transaction = history.CreateTransaction($"Insert \"")) {
+                args.TextView.TextBuffer.Insert(position, "\"\"");
+                // Move the caret between the double quotes
+                SnapshotPoint caretPosition = new SnapshotPoint(args.TextView.TextBuffer.CurrentSnapshot, position + 1);
+                args.TextView.Caret.MoveTo(caretPosition);
+                transaction.Complete();
+            }
+            return true;
+        } else if (args.TypedChar == '\'' && args.TextView.Selection.IsEmpty) {
+            // Handle the single quote character when no text is selected
+            int position = args.TextView.Caret.Position.BufferPosition.Position;
+            ITextSnapshot snapshot = args.TextView.TextBuffer.CurrentSnapshot;
+
+            // Get the previous and next characters
+            char prevChar = position > 0 ? snapshot[position - 1] : '\0';
+            char nextChar = position < snapshot.Length ? snapshot[position] : '\0';
+
+            // Define the conditions under which only a single quote should be inserted
+            bool singleQuoteCondition =
+                char.IsLetterOrDigit(nextChar) ||
+                char.IsLetterOrDigit(prevChar) ||
+                nextChar == '\'' ||
+                prevChar == '\'';
+
+            if (singleQuoteCondition) {
+                // Just insert a single quote
+                ITextUndoHistory subHistory = _textUndoHistoryRegistry.GetHistory(args.TextView.TextBuffer);
+                using (ITextUndoTransaction transaction = subHistory.CreateTransaction($"Insert '")) {
+                    args.TextView.TextBuffer.Insert(position, "'");
+                    transaction.Complete();
+                }
+                return true;
+            }
+
+            // If no text is selected and conditions do not match, handle insertion of single quotes
+            ITextUndoHistory history = _textUndoHistoryRegistry.GetHistory(args.TextView.TextBuffer);
+            using (ITextUndoTransaction transaction = history.CreateTransaction($"Insert '")) {
+                args.TextView.TextBuffer.Insert(position, "''");
+                // Move the caret between the single quotes
+                SnapshotPoint caretPosition = new SnapshotPoint(args.TextView.TextBuffer.CurrentSnapshot, position + 1);
+                args.TextView.Caret.MoveTo(caretPosition);
+                transaction.Complete();
+            }
+            return true;
         } else {
             // For other characters, handle as before
             if (!args.TextView.Selection.IsEmpty) {
@@ -78,7 +149,7 @@ public class AutoSurroundCommandHandler : ICommandHandler<TypeCharCommandArgs> {
                 if (_configuration.TryGetClosingChar(GetFileName(args.SubjectBuffer), args.TypedChar, out char closing)) {
                     ITextUndoHistory history = _textUndoHistoryRegistry.GetHistory(args.TextView.TextBuffer);
                     using (ITextUndoTransaction transaction = history.CreateTransaction($"{args.TypedChar}Auto Surround{closing}")) {
-                        int position = args.TextView.Selection.ActivePoint.Position;
+                        int position = args.TextView.Caret.Position.BufferPosition.Position;
                         args.TextView.TextBuffer.Insert(position, args.TypedChar.ToString());
                         args.TextView.TextBuffer.Insert(position + 1, closing.ToString());
 
