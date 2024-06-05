@@ -27,10 +27,4 @@ and this is correct behavier:
 
 ![4](https://github.com/BachiMjavanadze/AutoCloseAndSurroundPunctuations/assets/38082501/c120f1e9-d993-4989-8555-521ee0e820e4)
 
-To avoid overlapping I recomend disable `Visual Studio`'s standard behaviors:
-
-`Automatic brace compilation`
-and
-`Automatically surround selection when typing quotes or brackets`
-
 P.S. This extension is a clone of [AutoSurround](https://marketplace.visualstudio.com/items?itemName=reduckted.AutoSurround), but the author did not receive my pull request, so I decided to add [functionality](https://github.com/reduckted/AutoSurround/issues/2) and create a new extension.
