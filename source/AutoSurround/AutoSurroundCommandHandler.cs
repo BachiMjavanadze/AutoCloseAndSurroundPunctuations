@@ -78,7 +78,11 @@ public class AutoSurroundCommandHandler : ICommandHandler<TypeCharCommandArgs> {
                 char.IsLetterOrDigit(nextChar) ||
                 char.IsLetterOrDigit(prevChar) ||
                 nextChar == '"' ||
-                prevChar == '"';
+                prevChar == '"' ||
+                nextChar == '{' ||
+                prevChar == '}' ||
+                nextChar == '(' ||
+                prevChar == ')';
 
             if (doubleQuoteCondition) {
                 // Just insert a single quote
@@ -114,7 +118,11 @@ public class AutoSurroundCommandHandler : ICommandHandler<TypeCharCommandArgs> {
                 char.IsLetterOrDigit(nextChar) ||
                 char.IsLetterOrDigit(prevChar) ||
                 nextChar == '\'' ||
-                prevChar == '\'';
+                prevChar == '\'' ||
+                nextChar == '{' ||
+                prevChar == '}' ||
+                nextChar == '(' ||
+                prevChar == ')';
 
             if (singleQuoteCondition) {
                 // Just insert a single quote
